@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by baolei on 2015/11/19.
  */
 @Controller
 public class MyController {
-    @RequestMapping("login") //用来处理前台的login请求
+    @RequestMapping("login") //
     private String hello(@RequestParam(value = "username", required = false)String username,
             @RequestParam(value = "password", required = false)String password){
         System.out.println("-----------------------" + "Hello "+username+",Your password is: "+password);
@@ -24,13 +26,17 @@ public class MyController {
     }
 
     @RequestMapping(value = "/getuser", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public @ResponseBody User hellot(HttpServletRequest request, HttpServletResponse response){
-
+    public @ResponseBody Map<String,String> hellot(HttpServletRequest request, HttpServletResponse response){
         response.setHeader("asdfasdfas","asdfasdfasdfasdf");
-        System.out.println("------------------------输出json数据");
+        System.out.println("------------------------鐢熸垚json");
         User user = new User();
         user.setUsername("tianbaolei");
         user.setPassword("tianbaolei");
-        return user;
+
+        Map<String,String> map = new HashMap<String, String>();
+        map.put("tianbaolei","tianbaolei");
+        map.put("tianbaolei","tianbaolei");
+
+        return map;
     }
 }
