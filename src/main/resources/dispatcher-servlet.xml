@@ -19,39 +19,39 @@
     <mvc:resources location="/js/*" mapping="/js/**"/>
     <mvc:resources location="/images/*" mapping="/images/**"/>
 
+    <!-- 返回json 方法二 需要导入 jackson-annotations.jar,jackson-core.jar,jackson-databind.jar-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html; charset=UTF-8</value>
+                            <value>application/json;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html; charset=UTF-8</value>
+                            <value>application/json;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
     <!-- 添加注解驱动 -->
-    <!--<mvc:annotation-driven/>-->
-    <mvc:annotation-driven>
-        <mvc:message-converters>
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <!--<property name="objectMapper" ref="jacksonObjectMapper"></property>-->
-                <property name="objectMapper">
-                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
-                        <property name="dateFormat">
-                            <bean class="java.text.SimpleDateFormat">
-                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
-                            </bean>
-                        </property>
-                    </bean>
-                </property>
-                <property name="supportedMediaTypes">
-                    <list>
-                        <value>application/json</value>
-                        <value>application/xml</value>
-                        <value>text/html</value>
-                        <value>text/plain</value>
-                        <value>text/xml</value>
-                    </list>
-                </property>
-            </bean>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
+    <mvc:annotation-driven/>
     <!-- 默认扫描的包路径 -->
     <context:component-scan base-package="com.controller"/>
 
     <!-- mvc:view-controller可以在不需要Controller处理request的情况，转向到设置的View -->
     <!-- 像下面这样设置，如果请求为/，则不通过controller，而直接解析为/index.jsp -->
-    <mvc:view-controller path="/" view-name="index"/>
+    <!--<mvc:view-controller path="/" view-name="index"/>-->
     <!--<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
