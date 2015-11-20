@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,8 +37,26 @@ public class MyController {
 
         Map<String,String> map = new HashMap<String, String>();
         map.put("tianbaolei","tianbaolei");
-        map.put("tianbaolei","tianbaolei");
+        map.put("tianbaolei", "tianbaolei");
 
         return map;
+    }
+
+    @RequestMapping(value = "/getjson", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public @ResponseBody List getJson(HttpServletRequest request, HttpServletResponse response){
+//        response.setHeader("asdfasdfas", "asdfasdfasdfasdf");
+        System.out.println("------------------------生成json并显示");
+        User user = new User();
+        user.setUsername("tianbaolei");
+        user.setPassword("tianbaolei");
+
+        Map<String,String> map = null;
+        List<Map<String,String>> list = new ArrayList<Map<String, String>>();
+        for(int i=0;i<5;i++){
+            map = new HashMap<String, String>();
+            map.put("key","value"+i);
+            list.add(map);
+        }
+        return list;
     }
 }
