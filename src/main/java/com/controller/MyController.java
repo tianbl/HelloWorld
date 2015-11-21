@@ -45,7 +45,7 @@ public class MyController {
     @RequestMapping(value = "/getjson", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody List getJson(HttpServletRequest request, HttpServletResponse response){
 //        response.setHeader("asdfasdfas", "asdfasdfasdfasdf");
-        System.out.println("------------------------生成json并显示");
+//        System.out.println("------------------------生成json并显示");
         User user = new User();
         user.setUsername("tianbaolei");
         user.setPassword("tianbaolei");
